@@ -10,7 +10,9 @@ def create_app(config_class=Config):
 
     db.init_app(app)
 
-    # Register blueprints here (will add later)
+    # Register blueprints
+    from app.routes import init_app
+    init_app(app)
     
     # Create database tables
     with app.app_context():
