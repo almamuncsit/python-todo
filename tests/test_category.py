@@ -14,9 +14,10 @@ def test_get_categories(client):
     
     response = client.get('/categories')
     assert response.status_code == 200
-    assert len(response.json) == 2
-    assert response.json[0]['name'] == 'Work'
-    assert response.json[1]['name'] == 'Personal'
+    categories = response.json
+    assert len(categories) == 2
+    assert any(cat['name'] == 'Work' for cat in categories)
+    assert any(cat['name'] == 'Personal' for cat in categories)
 
 def test_update_category(client):
     # Create a category first

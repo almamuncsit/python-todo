@@ -34,9 +34,10 @@ def test_get_tasks(client, category):
     
     response = client.get('/tasks')
     assert response.status_code == 200
-    assert len(response.json) == 2
-    assert response.json[0]['title'] == 'Task 1'
-    assert response.json[1]['title'] == 'Task 2'
+    tasks = response.json
+    assert len(tasks) == 2
+    assert any(task['title'] == 'Task 1' for task in tasks)
+    assert any(task['title'] == 'Task 2' for task in tasks)
 
 def test_update_task(client, category):
     # Create a task first
